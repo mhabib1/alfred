@@ -1,3 +1,3 @@
 # Alfred
 
-### the simple task manager
+## the simple task manager
