@@ -28,8 +28,26 @@ export const todoReducer = createSlice({
         );
       }
     },
+    deleteTodo: (state, action) => {
+      // rename action.payload to removingItemId because the id of the item we're removing is being passed to this reducer
+      const removingItemId = action.payload;
+
+      // fetch the todoList from localStorage
+      const todoList = window.localStorage.getItem('todoList');
+
+      // if there is any data in the todo list, remove the item from the list with the provided ID
+      if (todoList) {
+        // covert to list of JSON objects
+        let todoListArr = JSON.parse(todoList);
+        todoListArr = todoListArr.filter(
+          (todoItem) => todoItem.id !== removingItemId
+        );
+        window.localStorage.setItem('todoList', JSON.stringify(todoListArr));
+        state.todoList = todoListArr;
+      }
+    },
   },
 });
 
-export const { addTodo } = todoReducer.actions;
+export const { addTodo, deleteTodo } = todoReducer.actions;
 export default todoReducer.reducer;

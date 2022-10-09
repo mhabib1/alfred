@@ -2,11 +2,15 @@ import React from 'react';
 import cx from 'classnames';
 import { format } from 'date-fns/esm';
 import { MdDelete, MdEdit } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import { deleteTodo } from '../reducers/todoReducer';
 import styles from '../styles/modules/todoItem.module.scss';
 
 function TodoItem({ todo }) {
+  const dispatch = useDispatch();
+
   const handleDelete = () => {
-    console.log('Deleting');
+    dispatch(deleteTodo(todo.id));
   };
   const handleUpdate = () => {
     console.log('Updating');
