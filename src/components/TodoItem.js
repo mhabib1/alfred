@@ -3,6 +3,7 @@ import cx from 'classnames';
 import { format } from 'date-fns/esm';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 import { deleteTodo } from '../reducers/todoReducer';
 import styles from '../styles/modules/todoItem.module.scss';
 
@@ -11,6 +12,7 @@ function TodoItem({ todo }) {
 
   const handleDelete = () => {
     dispatch(deleteTodo(todo.id));
+    toast.success('Task Deleted Successfully');
   };
   const handleUpdate = () => {
     console.log('Updating');
