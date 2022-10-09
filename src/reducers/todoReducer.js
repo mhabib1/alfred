@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { startTransition } from 'react';
 
 const getInitialTodo = () => {
   const localTodoList = window.localStorage.getItem('todoList');

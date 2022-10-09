@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import cx from 'classnames';
 import styles from '../styles/modules/button.module.scss';
 
@@ -12,10 +12,6 @@ function Button({ type, variant = 'primary', children, ...rest }) {
     <button
       type={type === 'submit' ? 'submit' : 'button'}
       className={cx(styles.button, styles[`button--${buttonTypes[variant]}`])}
-      //   className={getClasses([
-      //     styles.button,
-      //     styles[`button--${buttonTypes[variant]}`],
-      //   ])}
       {...rest}
     >
       {children}
