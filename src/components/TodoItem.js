@@ -4,7 +4,7 @@ import { format } from 'date-fns/esm';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
-import { deleteTodo } from '../reducers/todoReducer';
+import { deleteTodo, updateTodo } from '../reducers/todoReducer';
 import styles from '../styles/modules/todoItem.module.scss';
 import TodoModal from './TodoModal';
 import CheckButton from './CheckButton';
@@ -29,11 +29,20 @@ function TodoItem({ todo }) {
     setUpdateModalOpen(true);
   };
 
+  const handleCheck = () => {
+    setChecked(!checked);
+    dispatch(
+      updateTodo({
+        ...todo,
+        status: checked ? 'incomplete' : 'complete',
+      })
+    );
+  };
   return (
     <>
       <div className={styles.item}>
         <div className={styles.todoDetails}>
-          <CheckButton checked={checked} setChecked={setChecked} />
+          <CheckButton checked={checked} handleCheck={handleCheck} />
           <div className={styles.texts}>
             <p
               className={cx(

@@ -63,8 +63,12 @@ export const todoReducer = createSlice({
         state.todoList = todoListArr;
       }
     },
+    updateFilterStatus: (state, action) => {
+      state.filterStatus = action.payload;
+    },
   },
 });
 
-export const { addTodo, deleteTodo, updateTodo } = todoReducer.actions;
+export const { addTodo, deleteTodo, updateTodo, updateFilterStatus } =
+  todoReducer.actions;
 export default todoReducer.reducer;
