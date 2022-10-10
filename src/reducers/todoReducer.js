@@ -14,6 +14,7 @@ export const todoReducer = createSlice({
   initialState: initialValue,
   reducers: {
     addTodo: (state, action) => {
+      console.log('adding this');
       state.todoList.push(action.payload);
       const todoList = window.localStorage.getItem('todoList');
       if (todoList) {
@@ -45,8 +46,25 @@ export const todoReducer = createSlice({
         state.todoList = todoListArr;
       }
     },
+    updateTodo: (state, action) => {
+      const todoList = window.localStorage.getItem('todoList');
+
+      // if there is any data in the todo list, remove the item from the list with the provided ID
+      if (todoList) {
+        // covert to list of JSON objects
+        const todoListArr = JSON.parse(todoList);
+        todoListArr.forEach((todo, index) => {
+          if (todo.id === action.payload.id) {
+            todo.title = action.payload.title;
+            todo.status = action.payload.status;
+          }
+        });
+        window.localStorage.setItem('todoList', JSON.stringify(todoListArr));
+        state.todoList = todoListArr;
+      }
+    },
   },
 });
 
-export const { addTodo, deleteTodo } = todoReducer.actions;
+export const { addTodo, deleteTodo, updateTodo } = todoReducer.actions;
 export default todoReducer.reducer;
